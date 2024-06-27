@@ -1,0 +1,35 @@
+.container {
+  background-color: white;
+  width: 25em;
+  min-height: 1.5em;
+  border: #777 solid 0.05px;
+  border-radius: 0.25em;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.value {
+  flex-grow: 1;
+}
+
+.divider {
+  background-color: #777;
+  align-self: stretch;
+  width: 0.05em;
+}
+
+.clear-btn {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #777;
+}
+
+.clear-btn:hover,
+.clear-btn:focus {
+  color: #333;
+}
