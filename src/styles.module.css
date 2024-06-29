@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   background-color: white;
   width: 25em;
   min-height: 1.5em;
@@ -20,6 +21,12 @@
   width: 0.05em;
 }
 
+.caret {
+  border: 0.4em solid transparent;
+  border-top-color: #777;
+  translate: 0 25%;
+}
+
 .clear-btn {
   border: none;
   outline: none;
@@ -32,4 +39,37 @@
 .clear-btn:hover,
 .clear-btn:focus {
   color: #333;
+}
+
+.options {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 15em;
+  overflow-y: auto;
+  border: 0.05em solid #777;
+  border-radius: 0.25em;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: calc(100% + 0.25em);
+  background-color: white;
+  z-index: 100;
+}
+
+.option {
+  padding: 0.3em 0.5em;
+  cursor: pointer;
+}
+
+.options.show {
+  display: block;
+}
+
+.option.selected {
+  background-color: hsl(100, 100%, 75%);
+}
+.option:hover {
+  background-color: hsl(200, 100%, 75%);
 }

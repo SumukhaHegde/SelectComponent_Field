@@ -1,5 +1,5 @@
-import React from "react";
-import RCSingleSelectDropdown from "./RCSingleSelectDropdown";
+import React, { useState } from "react";
+import RCSingleSelectDropdown, { selectOption } from "./RCSingleSelectDropdown";
 
 const options = [
   { label: "first", value: 1 },
@@ -9,9 +9,23 @@ const options = [
   { label: "fifth", value: 5 },
 ];
 function App() {
+  const [value1, setValue1] = useState<selectOption[]>([options[0]]);
+  const [value2, setValue2] = useState<selectOption | undefined>(options[0]);
+
   return (
     <>
-      <RCSingleSelectDropdown options={options} value={options[0]} />
+      <RCSingleSelectDropdown
+        multiple={false}
+        options={options}
+        value={value2}
+        onChange={(o) => setValue2(o)}
+      />
+      <RCSingleSelectDropdown
+        multiple={true}
+        options={options}
+        value={value1}
+        onChange={(o) => setValue1(o)}
+      />
     </>
   );
 }
