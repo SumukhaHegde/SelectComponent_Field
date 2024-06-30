@@ -11,7 +11,7 @@ type singleSelectProps = {
 
 type multiSelectProps = {
   multiple: true;
-  value?: selectOption[];
+  value: selectOption[];
   onChange: (value: selectOption[]) => void;
 };
 type selectProps = {
@@ -26,17 +26,23 @@ const RCSingleSelectDropdown = ({
 }: selectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>();
+  const [dropdownOptions, setDropdownOptions] =
+    useState<selectOption[]>(options);
 
   const selectOption = (option: selectOption) => {
     setSelectedOption(option.label);
     if (multiple) {
-      onChange((prev) => [...prev, option]);
+      onChange([...value, option]);
+      setDropdownOptions((prev) => prev.filter((opt) => opt !== option));
     } else {
       if (option !== value) onChange(option);
     }
   };
   const handleClear = () => {
-    multiple ? onChange([]) : onChange(undefined);
+    if (multiple) {
+      onChange([]);
+      setDropdownOptions(options);
+    } else onChange(undefined);
   };
   return (
     <div
@@ -45,7 +51,18 @@ const RCSingleSelectDropdown = ({
       onClick={() => setIsOpen((prev) => !prev)}
       className={`${styles.container}`}
     >
-      <span className={styles.value}>{value?.label}</span>
+      <span className={styles.value}>
+        {multiple
+          ? value?.map((val) => (
+              <>
+                <button className={styles.optionBadge}>
+                  {val.label}
+                  <span>&times;</span>
+                </button>
+              </>
+            ))
+          : value?.label}
+      </span>
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -58,17 +75,23 @@ const RCSingleSelectDropdown = ({
       <div className={`${styles.divider}`}></div>
       <div className={styles.caret}></div>
       <ul className={`${styles.options} ${isOpen ? styles.show : ""}`}>
-        {options.map((option) => (
-          <li
-            key={option.value}
-            className={`${styles.option} ${
-              selectedOption === option.label ? styles.selected : ""
-            }`}
-            onClick={() => selectOption(option)}
-          >
-            {option.label}
-          </li>
-        ))}
+        {dropdownOptions.length === 0 ? (
+          <span>No records found</span>
+        ) : (
+          dropdownOptions.map((option) => (
+            <li
+              key={option.value}
+              className={`${styles.option} ${
+                selectedOption === option.label && !multiple
+                  ? styles.selected
+                  : ""
+              }`}
+              onClick={() => selectOption(option)}
+            >
+              {option.label}
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

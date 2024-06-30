@@ -13,6 +13,9 @@
 
 .value {
   flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 
 .divider {
@@ -72,4 +75,10 @@
 }
 .option:hover {
   background-color: hsl(200, 100%, 75%);
+}
+
+.optionBadge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }

@@ -9,7 +9,7 @@ const options = [
   { label: "fifth", value: 5 },
 ];
 function App() {
-  const [value1, setValue1] = useState<selectOption[]>([options[0]]);
+  const [value1, setValue1] = useState<selectOption[]>([]);
   const [value2, setValue2] = useState<selectOption | undefined>(options[0]);
 
   return (
@@ -20,6 +20,7 @@ function App() {
         value={value2}
         onChange={(o) => setValue2(o)}
       />
+      <br />
       <RCSingleSelectDropdown
         multiple={true}
         options={options}
