@@ -81,4 +81,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
+  align-items: center;
+  border-radius: 0.3em;
+  border: 0.05em solid #777;
+}
+
+.dropdown-placeholder {
+  color: #777;
+}
+
+.single-option-clear-btn {
+  font-size: 1.5em;
+  color: #777;
 }

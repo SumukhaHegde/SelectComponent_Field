@@ -44,6 +44,14 @@ const RCSingleSelectDropdown = ({
       setDropdownOptions(options);
     } else onChange(undefined);
   };
+
+  const handleSingleOptionClearBtn = (val) => {
+    if (multiple) {
+      onChange(value.filter((v) => v !== val));
+      setDropdownOptions((prev) => [...prev, val]);
+    }
+  };
+
   return (
     <div
       tabIndex={0}
@@ -51,13 +59,21 @@ const RCSingleSelectDropdown = ({
       onClick={() => setIsOpen((prev) => !prev)}
       className={`${styles.container}`}
     >
+      {(multiple ? value.length === 0 : !value) && (
+        <span className={styles["dropdown-placeholder"]}>Select Option</span>
+      )}
       <span className={styles.value}>
         {multiple
           ? value?.map((val) => (
               <>
                 <button className={styles.optionBadge}>
                   {val.label}
-                  <span>&times;</span>
+                  <span
+                    className={styles["single-option-clear-btn"]}
+                    onClick={() => handleSingleOptionClearBtn(val)}
+                  >
+                    &times;
+                  </span>
                 </button>
               </>
             ))
